@@ -1,29 +1,29 @@
-import node from "./node";
+import Node from "./node.js";
 
-export default class tree {
+export default class Tree {
     constructor (array) {
-        const sortedArray = sortAndRemoveDuplicates(array);
-        this.root = buildTree(sortedArray, 0, sortedArray.lengt - 1);
+        this.root = this.buildTree(array);
     }
 
     sortAndRemoveDuplicates(array) {
 
-        const sortedArray = array.sort((a, b) => a - b);
+        const SORTED_ARRAY = [...new Set(array)].sort((a, b) => a - b);
 
-        return sortedArray.filter((value, index, self) => self.indexOf(value) === index);
+        return SORTED_ARRAY;
     }
 
-    buildTree(array, start, end) {
+    buildTree(array) {
 
-        if (start > end) {
-            return null;
-        }
+        const SORTED_ARRAY = this.sortAndRemoveDuplicates(array);
 
-        let mid = parseInt(start + end) / 2;
+        if(SORTED_ARRAY.length === 0) return null;
 
-        let root = new node(array[mid]);
-        root.leftChild = buildTree(array, start, mid - 1);
-        root.rightChild = buildTree(array, mid + 1, end);
+        const MID = parseInt(SORTED_ARRAY.length / 2);
+        let root = new Node (
+            SORTED_ARRAY[MID],
+            this.buildTree(SORTED_ARRAY.slice(0, MID)),
+            this.buildTree(SORTED_ARRAY.slice(MID + 1))
+        );
 
         return root;
     }
