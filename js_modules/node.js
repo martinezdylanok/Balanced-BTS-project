@@ -1,7 +1,7 @@
-export default class node {
-    constructor () {
-        this.data = null;
-        this.leftChild = null;
-        this.rightChild = null;
+export default class Node {
+    constructor (data = null, left = null, right = null) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
     }
 }
