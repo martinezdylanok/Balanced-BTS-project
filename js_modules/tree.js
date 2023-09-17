@@ -27,4 +27,13 @@ export default class Tree {
 
         return root;
     }
+
+    insert(value, root = this.root) {
+        if (root === null) return new Node(value);
+
+        root.data < value
+            ? (root.right = this.insert(value, root.right))
+            : (root.left = this.insert(value, root.left));
+        return root;
+    }
 }
