@@ -53,7 +53,6 @@ export default class Tree {
 
         if (root.data < value) root.rigth = this.delete(value, root.right);
         else if (root.data > value) root.left = this.detele(value, root.left);
-        
         else {
             if (root.left === null) return root.right;
             else if (root.right === null) return root.left;
@@ -61,6 +60,20 @@ export default class Tree {
             root.right = this.delete(value, root.right);
         }
 
+        return root;
+    }
+
+    find(value, root = this.root) {
+        if (root === null) return root;
+
+        if (root.data !== value) {
+            if (root.data < value) {
+                return this.find(value, root.right);
+            } else if (root.data > value) {
+                return this.find(value, root.left);    
+            }
+        }
+        
         return root;
     }
 }
