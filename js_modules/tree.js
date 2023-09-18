@@ -73,7 +73,32 @@ export default class Tree {
                 return this.find(value, root.left);    
             }
         }
-        
+
         return root;
+    }
+
+    levelOrder(callback) {
+        if (!this.root) return [];
+
+        let queue = [this.root];
+        let results = [];
+
+        while (queue.length) {
+            let level = [];
+            let size = queue.length;
+
+            for (let i = 0; i < size; i++) {
+                let node = queue.shift();
+                level.push(node.data);
+                
+                if (node.left) queue.push(node.left)
+                if (node.right) queue.push(node.right)
+                if (callback) callback(node);
+            }
+
+            results.push(level);
+        }
+
+        if (!callback) return results;
     }
 }
