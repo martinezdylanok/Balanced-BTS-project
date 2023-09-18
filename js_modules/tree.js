@@ -150,4 +150,13 @@ export default class Tree {
 
         if (!callback) return results.reverse();
     }
+
+    height (node = this.root) {
+        if (node === null) return -1;
+
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+        
+        return Math.max(leftHeight, rightHeight) +1;
+    }
 }
