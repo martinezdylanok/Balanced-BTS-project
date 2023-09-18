@@ -105,11 +105,11 @@ export default class Tree {
     preorder(callback) {
         if (!this.root) return [];
 
-        const stack = [this.root];
-        const results = [];
+        let stack = [this.root];
+        let results = [];
 
         while (stack.length) {
-          const node = stack.pop();
+          let node = stack.pop();
 
           if (node.right) stack.push(node.right);
           if (node.left) stack.push(node.left);
