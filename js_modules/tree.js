@@ -90,7 +90,7 @@ export default class Tree {
             for (let i = 0; i < size; i++) {
                 let node = queue.shift();
                 level.push(node.data);
-                
+
                 if (node.left) queue.push(node.left)
                 if (node.right) queue.push(node.right)
                 if (callback) callback(node);
@@ -99,6 +99,25 @@ export default class Tree {
             results.push(level);
         }
 
+        if (!callback) return results;
+    }
+
+    preorder(callback) {
+        if (!this.root) return [];
+
+        const stack = [this.root];
+        const results = [];
+
+        while (stack.length) {
+          const node = stack.pop();
+
+          if (node.right) stack.push(node.right);
+          if (node.left) stack.push(node.left);
+          if (callback) callback(node);
+
+          results.push(node.key);
+        }
+        
         if (!callback) return results;
     }
 }
