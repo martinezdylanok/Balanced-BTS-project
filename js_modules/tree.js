@@ -12,6 +12,17 @@ export default class Tree {
         return SORTED_ARRAY;
     }
 
+    minValue(node) {
+        let minValue = node.data;
+
+        while (node.left !== null) {
+            minValue = node.left.data;
+            node = node.left;
+        }
+
+        return minValue;
+    }
+
     buildTree(array) {
 
         const SORTED_ARRAY = this.sortAndRemoveDuplicates(array);
@@ -42,12 +53,14 @@ export default class Tree {
 
         if (root.data < value) root.rigth = this.delete(value, root.right);
         else if (root.data > value) root.left = this.detele(value, root.left);
+        
         else {
             if (root.left === null) return root.right;
             else if (root.right === null) return root.left;
             root.data = this.minValue(root.right);
             root.right = this.delete(value, root.right);
         }
+
         return root;
     }
 }
