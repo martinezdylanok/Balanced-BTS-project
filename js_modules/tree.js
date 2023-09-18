@@ -156,7 +156,19 @@ export default class Tree {
 
         let leftHeight = this.height(node.left);
         let rightHeight = this.height(node.right);
-        
+
         return Math.max(leftHeight, rightHeight) +1;
+    }
+
+    depth(node, root = this.root, level = 0) {
+        if (!node) return null;
+        if (root === null) return 0;
+        if (root.data === node.data) return level;
+
+        let count = this.depth(node, root.left, level + 1);
+
+        if (count !== 0) return count;
+
+        return this.depth(node, root.right, level + 1);
     }
 }
