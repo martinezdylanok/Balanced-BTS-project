@@ -185,4 +185,12 @@ export default class Tree {
           this.isBalanced(node.right)
         );
     }
+
+    rebalance() {
+        if (this.root === null) return;
+
+        let sorted = [...new Set(this.inorder().sort((a, b) => a - b))];
+
+        this.root = this.buildTree(sorted);
+    }
 }
