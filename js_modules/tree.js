@@ -131,4 +131,23 @@ export default class Tree {
 
         if (result) return result;
     }
+
+    postorder(callback) {
+        if (!this.root) return [];
+
+        const stack = [this.root];
+        const results = [];
+
+        while (stack.length) {
+          const node = stack.pop();
+
+          if (node.left) stack.push(node.left);
+          if (node.right) stack.push(node.right);
+          if (callback) callback(node);
+
+          results.push(node.data);
+        }
+
+        if (!callback) return results.reverse();
+    }
 }
