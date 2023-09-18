@@ -36,4 +36,18 @@ export default class Tree {
             : (root.left = this.insert(value, root.left));
         return root;
     }
+
+    delete(value, root = this.root) {
+        if (root === null) return root;
+
+        if (root.data < value) root.rigth = this.delete(value, root.right);
+        else if (root.data > value) root.left = this.detele(value, root.left);
+        else {
+            if (root.left === null) return root.right;
+            else if (root.right === null) return root.left;
+            root.data = this.minValue(root.right);
+            root.right = this.delete(value, root.right);
+        }
+        return root;
+    }
 }
