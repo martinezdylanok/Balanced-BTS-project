@@ -115,7 +115,7 @@ export default class Tree {
           if (node.left) stack.push(node.left);
           if (callback) callback(node);
 
-          results.push(node.key);
+          results.push(node.data);
         }
         
         if (!callback) return results;
